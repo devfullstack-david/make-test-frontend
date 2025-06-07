@@ -1,0 +1,18 @@
+.footer-container {
+    background-color: var(--primary);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.footer-container__list {
+    display: flex;
+    color: white;
+    font-weight: bold;
+    gap: 50%;
+    margin-left: 30px;
+}
+
+.footer-container__logo {
+    margin-right: 30px;
+}
