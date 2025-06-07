@@ -2,8 +2,6 @@
 
 > "Transformando papel em progresso."
 
-![Make Test Banner](https://via.placeholder.com/1200x300?text=MAKE+TEST+%E2%80%94+O+FUTURO+%C3%89+DIGITAL)
-
 ---
 
 ## 🌐 Sobre o Projeto
@@ -85,8 +83,9 @@ Com **Make Test**, você entra em um novo universo onde a avaliação é fluida,
 **David Santos**
 Desenvolvedor Full-Stack apaixonado por soluções digitais inovadoras.
 
-![LinkedIn]https://www.linkedin.com/in/coderdavidgs/
-![GitHub]https://github.com/devfullstack-david
+https://www.linkedin.com/in/coderdavidgs/
+<br />
+https://github.com/devfullstack-david
 
 ---
 
