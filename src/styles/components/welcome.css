@@ -1,0 +1,31 @@
+.welcome-container {
+  background-image: url('/images/home_wallpaper.jpg');
+  background-size: cover;
+  background-position: 25% 25%;
+  background-repeat: no-repeat;
+  height: 81vh; 
+  width: 100%;
+}
+
+.welcome-container__create {
+    display: flex;
+    padding: 10px;
+    align-items: start;
+    justify-content: center;
+}
+
+.welcome-container__text {
+    font-size: 62px;
+    color: #00F168;
+    font-weight: bold;
+    margin-top: 5%;
+    height: 50vh;
+}
+
+
+.welcome-container__make {
+    display: flex;
+    padding: 10px;
+    align-items: start;
+    justify-content: center;
+}
