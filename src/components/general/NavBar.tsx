@@ -26,7 +26,10 @@ const NavBar = () => {
 
                 <div className='nav-menu'>
                     <button 
-                        className='nav-button__login' 
+                        className={
+                            pathName === '/login' ? 'nav-button__login_disabled' 
+                             : 'nav-button__login'
+                        } 
                         onClick={handleLogin}
                         disabled={pathName === '/login' ? true : false}
                     >

@@ -8,6 +8,15 @@ const Login = () => {
         <span className='login-title'>
           Entrar
         </span>
+
+        <br />
+        <br />
+        <br />
+        <form action="submit">
+          <label htmlFor='email'>
+            <input type='email' id="email" name="email" />
+          </label>
+        </form>
       </div>
     </div>
   )
