@@ -3,10 +3,11 @@
 import React from 'react'
 import Image from 'next/image';
 import '@/styles/components/navbar.css';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 
 const NavBar = () => {
     const router = useRouter();
+    const pathName = usePathname();
 
     const handleLogin = () => {
         router.push('/login');
@@ -24,7 +25,11 @@ const NavBar = () => {
                 </div>
 
                 <div className='nav-menu'>
-                    <button className='nav-button__login' onClick={handleLogin}>
+                    <button 
+                        className='nav-button__login' 
+                        onClick={handleLogin}
+                        disabled={pathName === '/login' ? true : false}
+                    >
                         Entrar
                     </button>
                 </div>

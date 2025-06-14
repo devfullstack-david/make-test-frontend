@@ -1,0 +1,22 @@
+.login-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 3vh;
+    margin-bottom: 3vh;
+}
+
+.login-container__form {
+    background-color: var(--primary);
+    width: 30%;
+    height: 70vh;
+    border-radius: 10px;
+    padding: 20px;
+    text-align: center;
+}
+
+.login-title {
+    color: #fff;
+    font-size: 36px;
+    font-weight: bold;
+}

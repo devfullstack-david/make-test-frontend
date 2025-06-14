@@ -1,8 +1,15 @@
 import React from 'react'
+import '@/styles/pages/login.css'
 
 const Login = () => {
   return (
-    <div>Login</div>
+    <div className='login-container'>
+      <div className='login-container__form'>
+        <span className='login-title'>
+          Entrar
+        </span>
+      </div>
+    </div>
   )
 }
 
