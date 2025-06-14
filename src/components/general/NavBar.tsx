@@ -3,8 +3,14 @@
 import React from 'react'
 import Image from 'next/image';
 import '@/styles/components/navbar.css';
+import { useRouter } from 'next/navigation';
 
 const NavBar = () => {
+    const router = useRouter();
+
+    const handleLogin = () => {
+        router.push('/login');
+    };
   return (
         <nav>
             <div className='nav-container'>
@@ -18,7 +24,7 @@ const NavBar = () => {
                 </div>
 
                 <div className='nav-menu'>
-                    <button className='nav-button__login'>
+                    <button className='nav-button__login' onClick={handleLogin}>
                         Entrar
                     </button>
                 </div>
