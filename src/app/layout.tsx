@@ -9,6 +9,9 @@ import { useState } from "react";
 import Modal from "@mui/material/Modal";
 import Box from '@mui/material/Box';
 import { modalStyle } from "@/types/pages/layout";
+import Typography from "@mui/material/Typography";
+import FormControl from "@mui/material/FormControl";
+import TextField from "@mui/material/TextField";
 
 export default function RootLayout({
   children,
@@ -16,9 +19,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   const [showModal, setShowModal] = useState<boolean>(false);
+  const [password, setPassword] = useState<string>('');
+  const [email, setEmail] = useState<string>('');
 
   const openModal = () => {
     setShowModal(true);
+  };
+
+  const handleLogin = () => {
+    console.log('fazendo o login');
   };
 
   return (
@@ -33,8 +42,32 @@ export default function RootLayout({
               open={showModal}
               onClose={() => setShowModal(false)}
             >
-              <Box sx={modalStyle}>
-                Olá eu sou um modal
+              <Box 
+                sx={modalStyle}
+                component="form"
+                onSubmit={handleLogin}
+              >
+                <Typography variant="h5" textAlign={"center"} sx={{ mb: 4 }}>
+                  Entrar
+                </Typography>
+
+                <FormControl fullWidth>
+                  <TextField 
+                    label="E-mail"
+                    value={email}
+                    type="email"
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
+                </FormControl>
+
+                <FormControl fullWidth sx={{ mt: 2 }}>
+                  <TextField 
+                    label="Senha"
+                    value={password}
+                    type="password"
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                </FormControl>
               </Box>
             </Modal>
             {children}
