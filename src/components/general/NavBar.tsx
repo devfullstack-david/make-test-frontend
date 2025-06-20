@@ -4,14 +4,12 @@ import React from 'react'
 import Image from 'next/image';
 import '@/styles/components/navbar.css';
 import { useRouter, usePathname } from 'next/navigation';
+import { NavBarProps } from '@/types/components/navbar';
 
-const NavBar = () => {
+const NavBar = ({ handleOpenModal }: NavBarProps) => {
     const router = useRouter();
     const pathName = usePathname();
 
-    const handleLogin = () => {
-        router.push('/login');
-    };
   return (
         <nav>
             <div className='nav-container'>
@@ -21,6 +19,8 @@ const NavBar = () => {
                         width={180}
                         height={70}
                         alt="Logo make test"
+                        className='click_logo'
+                        onClick={() =>  router.push('/')}
                     />
                 </div>
 
@@ -30,7 +30,7 @@ const NavBar = () => {
                             pathName === '/login' ? 'nav-button__login_disabled' 
                              : 'nav-button__login'
                         } 
-                        onClick={handleLogin}
+                        onClick={handleOpenModal}
                         disabled={pathName === '/login' ? true : false}
                     >
                         Entrar

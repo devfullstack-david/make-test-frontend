@@ -33,3 +33,7 @@
     font-weight: bold;
     color: var(--primary);
 }
+
+.click_logo{
+    cursor: pointer;
+}
