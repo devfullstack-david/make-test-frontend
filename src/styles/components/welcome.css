@@ -1,3 +1,16 @@
 .primary_text {
     color: var(--primary);
 }
+
+.home_image {
+    width: 70%;
+    height: 30%;
+    border-radius: 10px;
+}
+
+.home_alternative_image {
+    width: 70%;
+    height: 30%;
+    border-radius: 10px;
+    margin-top: 40px;
+}

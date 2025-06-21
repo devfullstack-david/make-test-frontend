@@ -19,4 +19,6 @@ export const welcomeSx = {
     input: {
       color: 'white',
     },
-  };
+    width: '300px',
+    mr: 1,
+};
