@@ -1,5 +1,6 @@
 'use client';
 
+import { TestimonialsProps } from '@/types/components/testimonials';
 import Avatar from '@mui/material/Avatar';
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
@@ -7,26 +8,10 @@ import CardContent from '@mui/material/CardContent';
 import Rating from '@mui/material/Rating';
 import Typography from '@mui/material/Typography';
 
-const Testimonials = () => {
-  const testimonials = [
-    {
-      image: '/images/person1.jpg',
-      name: 'Vinicius Carmo',
-      rating: 5,
-      comment: `
-        O Make test oferece realmente 
-        uma plataforma pronta para gerir avaliações
-        a serem realizadas sendo que por vantagem temos
-        a economia do papel
-      `
-    },
-  ];
-
+const Testimonials = (props: TestimonialsProps) => {
   return (
-    <>
-      {testimonials.map((t, i) => (
         <Card
-          key={i}
+          key={props.index}
           sx={{
             maxWidth: 400,
             mx: 'auto',
@@ -43,8 +28,8 @@ const Testimonials = () => {
               alignItems={'center'}
             >
               <Avatar 
-                src={t.image}
-                alt={t.name[0]}
+                src={props.image}
+                alt={props.name[0]}
               />
               <Typography
                 textAlign={'center'}
@@ -52,7 +37,7 @@ const Testimonials = () => {
                 fontWeight={'bolder'}
                 variant='h6'
               >
-                {t.name}
+                {props.name}
               </Typography>
             </Box>
 
@@ -62,13 +47,17 @@ const Testimonials = () => {
               mb: 1,
               mt: 3,
             }}>
-              <Rating value={t.rating} precision={0.5} readOnly />
+              <Rating 
+                value={props.rating} 
+                precision={0.5} 
+                readOnly 
+              />
               <Typography
                 color='white' 
                 variant="body2" 
                 sx={{ ml: 1 }}
               >
-                {t.rating} / 5
+                {props.rating} / 5
               </Typography>
             </Box>
 
@@ -76,12 +65,10 @@ const Testimonials = () => {
               variant="body2"
               color="white"
             >
-              {t.comment}
+              {props.comment}
             </Typography>
           </CardContent>
         </Card>
-      ))}
-    </>
   );
 };
 

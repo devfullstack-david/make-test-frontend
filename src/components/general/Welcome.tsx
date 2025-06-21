@@ -8,6 +8,7 @@ import Typography from '@mui/material/Typography';
 import Image from 'next/image';
 import { useState } from 'react';
 import Testimonials from './Testimonials';
+import { testimonials } from '@/types/components/testimonials';
 
 const Welcome = () => {
   const [email, setEmail] = useState<string>("");
@@ -142,8 +143,17 @@ const Welcome = () => {
       >
         Depoimentos
       </Typography>
-
-      <Testimonials />
+        
+      { testimonials.map((t, i) => (
+        <Testimonials 
+          key={i}
+          index={i}
+          name={t.name}
+          comment={t.comment}
+          image={t.image}
+          rating={t.rating}
+        />
+      ))}
     </div>
   )
 }
