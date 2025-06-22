@@ -9,6 +9,8 @@ import Image from 'next/image';
 import { useState } from 'react';
 import Testimonials from './Testimonials';
 import { testimonials } from '@/types/components/testimonials';
+import Questions from './Questions';
+import { questions } from '@/types/components/questions';
 
 const Welcome = () => {
   const [email, setEmail] = useState<string>("");
@@ -153,6 +155,27 @@ const Welcome = () => {
             comment={t.comment}
             image={t.image}
             rating={t.rating}
+          />
+        ))}
+      </div>
+
+
+      <Typography
+        textAlign={'center'}
+        color='white'
+        fontWeight={'bolder'}
+        variant='h4'
+        sx={{ mt: 5, mb: 5 }}
+      >
+        Dúvidas
+      </Typography>
+
+      <div className='question-container'>
+        { questions.map((question, index) => (
+          <Questions 
+            key={index}
+            answer={question.answer}
+            question={question.question}
           />
         ))}
       </div>
