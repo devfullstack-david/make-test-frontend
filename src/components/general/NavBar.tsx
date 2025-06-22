@@ -35,6 +35,19 @@ const NavBar = ({ handleOpenModal }: NavBarProps) => {
                     >
                         Entrar
                     </button>
+
+                    <button 
+                        className={
+                            pathName === '/login' ? 'nav-button__login_disabled' 
+                             : 'nav-button__login'
+                        } 
+                        onClick={handleOpenModal}
+                        disabled={pathName === '/login' ? true : false}
+                        style={{ marginLeft: '10px'}}
+                    >
+                        Registrar
+                    </button>
+                    
                 </div>
             </div>
         </nav>
