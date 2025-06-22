@@ -19,6 +19,8 @@ const Testimonials = (props: TestimonialsProps) => {
             boxShadow: 4,
             backgroundColor: 'var(--primary)',
             mt: 2,
+            height: '200px',
+            padding: '20px'
           }}
         >
           <CardContent>

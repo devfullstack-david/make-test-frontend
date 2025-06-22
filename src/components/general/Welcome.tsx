@@ -143,17 +143,19 @@ const Welcome = () => {
       >
         Depoimentos
       </Typography>
-        
-      { testimonials.map((t, i) => (
-        <Testimonials 
-          key={i}
-          index={i}
-          name={t.name}
-          comment={t.comment}
-          image={t.image}
-          rating={t.rating}
-        />
-      ))}
+      
+      <div className='testimonials-container'>
+        { testimonials.map((t, i) => (
+          <Testimonials 
+            key={i}
+            index={i}
+            name={t.name}
+            comment={t.comment}
+            image={t.image}
+            rating={t.rating}
+          />
+        ))}
+      </div>
     </div>
   )
 }
