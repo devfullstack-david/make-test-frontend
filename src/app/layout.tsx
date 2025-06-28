@@ -27,6 +27,8 @@ export default function RootLayout({
   const [showRegisterModal, setShowRegisterModal] = useState<boolean>(false);
   const [password, setPassword] = useState<string>('');
   const [email, setEmail] = useState<string>('');
+  const [name, setName] = useState<string>('');
+  const [lastName, setLastName] = useState<string>('');
   const [showMessageError, setShowMessageError] = useState<boolean>(false);
   const [messageError, setMessageError] = useState<string>('');
   const [birthday, setBirthday] = useState<Dayjs | null>(null);
@@ -39,7 +41,32 @@ export default function RootLayout({
     setShowRegisterModal(true);
   };
 
-  const handleRegister = () => {};
+  const handleRegister = () => {
+    if (
+      !email || 
+      !password ||
+      !name ||
+      !lastName ||
+      !birthday
+    ) {
+      setMessageError('Por favor, preencha todos os campos');
+      setShowMessageError(true);
+    };
+
+    console.log('registrando um usuário');
+    // Registrar um usuário
+    resetFields();
+  };
+
+  const resetFields = () => {
+    setEmail('');
+    setPassword('');
+    setName('');
+    setLastName('');
+    setBirthday(null);
+    setMessageError('');
+    setShowMessageError(false);
+  };
 
   const handleLogin = () => {
     if (!email || !password) {
@@ -49,6 +76,7 @@ export default function RootLayout({
 
     console.log('fazendo o login');
     // Chamar o serviço de login
+    resetFields();
   };
 
   return (
@@ -93,6 +121,7 @@ export default function RootLayout({
                     onChange={(e) => setPassword(e.target.value)}
                   />
                 </FormControl>
+
                 <Typography
                   sx={{ color: 'red' }}
                   variant={'subtitle1'}
@@ -137,9 +166,9 @@ export default function RootLayout({
                   <TextField 
                     label="Nome"
                     required
-                    value={email}
+                    value={name}
                     type="text"
-                    onChange={(e) => setEmail(e.target.value)}
+                    onChange={(e) => setName(e.target.value)}
                   />
                 </FormControl>
 
@@ -147,9 +176,9 @@ export default function RootLayout({
                   <TextField 
                     label="Sobrenome"
                     required
-                    value={email}
+                    value={lastName}
                     type="text"
-                    onChange={(e) => setEmail(e.target.value)}
+                    onChange={(e) => setLastName(e.target.value)}
                   />
                 </FormControl>
 
@@ -162,6 +191,14 @@ export default function RootLayout({
                     />
                   </LocalizationProvider>
                 </FormControl>
+
+                <Typography
+                  sx={{ color: 'red' }}
+                  variant={'subtitle1'}
+                  display={ showMessageError ? 'block' : 'none'}
+                >
+                  { messageError }
+                </Typography>
 
                 <Button 
                   sx={{ mt: 2 }} 

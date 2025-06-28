@@ -141,9 +141,18 @@ const Welcome = () => {
         color='white'
         fontWeight={'bolder'}
         variant='h4'
-        sx={{ mb: 5 }}
+        sx={{ mb: 2 }}
       >
         Depoimentos
+      </Typography>
+
+      <Typography
+        textAlign={'center'}
+        color='#cfcfcf'
+        sx={{ mb: 5 }}
+      >
+        Siga os depoimentos de alguns usuários que utilizaram o sistema<br /> e deram
+        avaliações e feedbacks de seus usos
       </Typography>
       
       <div className='testimonials-container'>
