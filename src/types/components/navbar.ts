@@ -1,3 +1,4 @@
 export type NavBarProps = {
-    handleOpenModal: () => void;
+    handleOpenLoginModal: () => void;
+    handleOpenRegisterModal: () => void;
 };

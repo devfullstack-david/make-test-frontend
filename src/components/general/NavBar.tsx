@@ -6,7 +6,7 @@ import '@/styles/components/navbar.css';
 import { useRouter, usePathname } from 'next/navigation';
 import { NavBarProps } from '@/types/components/navbar';
 
-const NavBar = ({ handleOpenModal }: NavBarProps) => {
+const NavBar = ({ handleOpenLoginModal, handleOpenRegisterModal }: NavBarProps) => {
     const router = useRouter();
     const pathName = usePathname();
 
@@ -30,7 +30,7 @@ const NavBar = ({ handleOpenModal }: NavBarProps) => {
                             pathName === '/login' ? 'nav-button__login_disabled' 
                              : 'nav-button__login'
                         } 
-                        onClick={handleOpenModal}
+                        onClick={handleOpenLoginModal}
                         disabled={pathName === '/login' ? true : false}
                     >
                         Entrar
@@ -41,7 +41,7 @@ const NavBar = ({ handleOpenModal }: NavBarProps) => {
                             pathName === '/login' ? 'nav-button__login_disabled' 
                              : 'nav-button__login'
                         } 
-                        onClick={handleOpenModal}
+                        onClick={handleOpenRegisterModal}
                         disabled={pathName === '/login' ? true : false}
                         style={{ marginLeft: '10px'}}
                     >
