@@ -26,6 +26,7 @@ export default function RootLayout({
   const [showLoginModal, setShowLoginModal] = useState<boolean>(false);
   const [showRegisterModal, setShowRegisterModal] = useState<boolean>(false);
   const [password, setPassword] = useState<string>('');
+  const [company, setCompany] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [name, setName] = useState<string>('');
   const [lastName, setLastName] = useState<string>('');
@@ -179,6 +180,15 @@ export default function RootLayout({
                     value={lastName}
                     type="text"
                     onChange={(e) => setLastName(e.target.value)}
+                  />
+                </FormControl>
+
+                <FormControl fullWidth sx={{ mt: 2 }}>
+                  <TextField 
+                    label="Empresa"
+                    value={company}
+                    type="text"
+                    onChange={(e) => setCompany(e.target.value)}
                   />
                 </FormControl>
 
