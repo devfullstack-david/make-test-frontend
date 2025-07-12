@@ -1,11 +1,10 @@
 import api from "@/connections/api";
+import { UserForLogin } from "@/types/services/user";
 import Cookies from "js-cookie";
 
-export async function login(email: string, password: string) {
-    const response = await api.post('/login', {
-        email, password,
-    });
-
+export async function login(params: UserForLogin) {
+    const response = await api.post('/login', params);
+    
     const token = response.data.token;
 
     Cookies.set('token', token, {
@@ -14,5 +13,5 @@ export async function login(email: string, password: string) {
         sameSite: 'strict',
     });
 
-    return token;
+    return response;
 };

@@ -1,13 +1,13 @@
 "use client"
 import Welcome from "@/components/general/Welcome";
-import { useState } from "react";
+import { useSession } from "@/hooks/useSession";
 
 export default function Home() {
-  const [isLogged, setIsLogged] = useState<boolean>(false);
+  const { isLoggedIn } = useSession();
   return (
     <div>
       <main>
-        {isLogged ? (
+        {isLoggedIn ? (
           <div>
             esta logado
           </div>

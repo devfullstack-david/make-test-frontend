@@ -22,6 +22,10 @@ import { Dayjs } from "dayjs";
 import { registerUser } from "@/services/user";
 import { UserToRegister } from "@/types/services/user";
 import Snackbar from "@mui/material/Snackbar";
+import { login } from "@/services/login";
+import Alert from "@mui/material/Alert";
+import { useRouter } from "next/navigation";
+import ClientOnly from "@/components/general/ClientOnly";
 
 export default function RootLayout({
   children,
@@ -41,6 +45,8 @@ export default function RootLayout({
   const [showMessageError, setShowMessageError] = useState<boolean>(false);
   const [messageError, setMessageError] = useState<string>('');
   const [birthday, setBirthday] = useState<Dayjs | null>(null);
+  const [messageAlert, setMessageAlert] = useState<string>('');
+  const router = useRouter();
 
   const openLoginModal = () => {
     setShowLoginModal(true);
@@ -79,6 +85,7 @@ export default function RootLayout({
       const response = await registerUser(input);
 
       if (response?.status == 201) {
+        setMessageAlert('Usuário registrado');
         setIsOpenSnackbar(true);
       };
 
@@ -103,15 +110,27 @@ export default function RootLayout({
     setConfirmPassword('');
   };
 
-  const handleLogin = () => {
-    if (!email || !password) {
-      setMessageError('Por favor, preencha os dados corretamente');
+  const handleLogin = async () => {
+    try {
+      if (!email || !password) {
+        setMessageError('Por favor, preencha os dados corretamente');
+        setShowMessageError(true);
+      }
+
+      const response = await login({ email, password });
+
+      if (response?.status == 201) {
+        setMessageAlert('Login realizado com sucesso');
+        setIsOpenSnackbar(true);
+      };
+
+      setShowLoginModal(false);
+      resetRegisterFields();
+      router.refresh();
+    } catch (error) {
+      setMessageError('Ocorreu um erro ao realizar o login, verifique o email e senha colocados');
       setShowMessageError(true);
     }
-
-    console.log('fazendo o login');
-    // Chamar o serviço de login
-    resetRegisterFields();
   };
 
   return (
@@ -121,17 +140,28 @@ export default function RootLayout({
       </head>
       <body>
         <ThemeProvider theme={theme}>
-          <NavBar 
-            handleOpenLoginModal={openLoginModal} 
-            handleOpenRegisterModal={openRegisterModal}
-          />
+          <ClientOnly>
+            <NavBar 
+              handleOpenLoginModal={openLoginModal} 
+              handleOpenRegisterModal={openRegisterModal} 
+            />
+          
             <Snackbar 
               open={isOpenSnackbar}
               autoHideDuration={5000}
+              color="primary"
               onClose={() => setIsOpenSnackbar(false)}
-              message="Sucesso"
               anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-            />
+            >
+              <Alert
+                onClose={() => setIsOpenSnackbar(false)}
+                severity="success"
+                variant="filled"
+                sx={{ width: '100%' }}
+              >
+                { messageAlert }
+              </Alert>
+            </Snackbar>
 
             <Modal
               open={showLoginModal}
@@ -290,6 +320,7 @@ export default function RootLayout({
             </Modal>
             {children}
           <Footer />
+          </ClientOnly>
         </ThemeProvider>
       </body>
     </html>

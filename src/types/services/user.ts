@@ -9,3 +9,8 @@ export type UserToRegister = {
     password: string;
     confirmPassword: string;
 }
+
+export type UserForLogin = {
+    email: string;
+    password: string;
+}
