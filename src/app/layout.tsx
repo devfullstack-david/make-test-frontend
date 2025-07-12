@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 "use client";
 
 import "./globals.css";
@@ -17,15 +19,21 @@ import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import { Dayjs } from "dayjs";
+import { registerUser } from "@/services/user";
+import { UserToRegister } from "@/types/services/user";
+import Snackbar from "@mui/material/Snackbar";
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isOpenSnackbar, setIsOpenSnackbar] = useState<boolean>(false);
   const [showLoginModal, setShowLoginModal] = useState<boolean>(false);
   const [showRegisterModal, setShowRegisterModal] = useState<boolean>(false);
   const [password, setPassword] = useState<string>('');
+  const [confirmPassword, setConfirmPassword] = useState<string>('');
   const [company, setCompany] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [name, setName] = useState<string>('');
@@ -42,31 +50,57 @@ export default function RootLayout({
     setShowRegisterModal(true);
   };
 
-  const handleRegister = () => {
-    if (
-      !email || 
-      !password ||
-      !name ||
-      !lastName ||
-      !birthday
-    ) {
-      setMessageError('Por favor, preencha todos os campos');
-      setShowMessageError(true);
-    };
+  const handleRegister = async () => {
+    setIsLoading(true);
 
-    console.log('registrando um usuário');
-    // Registrar um usuário
-    resetFields();
+    try {
+        if (
+        !email || 
+        !password ||
+        !name ||
+        !lastName ||
+        !birthday
+      ) {
+        setMessageError('Por favor, preencha todos os campos');
+        setShowMessageError(true);
+        return;
+      };
+
+      const input: UserToRegister = {
+        email,
+        name,
+        lastName,
+        company,
+        birthday,
+        password,
+        confirmPassword,
+      };
+
+      const response = await registerUser(input);
+
+      if (response?.status == 201) {
+        setIsOpenSnackbar(true);
+      };
+
+      resetRegisterFields();
+      setShowRegisterModal(false);
+      setShowLoginModal(true);
+    } catch (err: any) {
+      setMessageError('Ocorreu um erro ao criar o usuário');
+      setShowMessageError(true);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
-  const resetFields = () => {
-    setEmail('');
-    setPassword('');
+  const resetRegisterFields = () => {
     setName('');
+    setCompany('');
     setLastName('');
     setBirthday(null);
     setMessageError('');
     setShowMessageError(false);
+    setConfirmPassword('');
   };
 
   const handleLogin = () => {
@@ -77,7 +111,7 @@ export default function RootLayout({
 
     console.log('fazendo o login');
     // Chamar o serviço de login
-    resetFields();
+    resetRegisterFields();
   };
 
   return (
@@ -91,6 +125,14 @@ export default function RootLayout({
             handleOpenLoginModal={openLoginModal} 
             handleOpenRegisterModal={openRegisterModal}
           />
+            <Snackbar 
+              open={isOpenSnackbar}
+              autoHideDuration={5000}
+              onClose={() => setIsOpenSnackbar(false)}
+              message="Sucesso"
+              anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+            />
+
             <Modal
               open={showLoginModal}
               onClose={() => setShowLoginModal(false)}
@@ -158,6 +200,7 @@ export default function RootLayout({
                     label="E-mail"
                     required
                     value={email}
+                    disabled={isLoading}
                     type="email"
                     onChange={(e) => setEmail(e.target.value)}
                   />
@@ -168,6 +211,7 @@ export default function RootLayout({
                     label="Nome"
                     required
                     value={name}
+                    disabled={isLoading}
                     type="text"
                     onChange={(e) => setName(e.target.value)}
                   />
@@ -177,6 +221,7 @@ export default function RootLayout({
                   <TextField 
                     label="Sobrenome"
                     required
+                    disabled={isLoading}
                     value={lastName}
                     type="text"
                     onChange={(e) => setLastName(e.target.value)}
@@ -187,6 +232,7 @@ export default function RootLayout({
                   <TextField 
                     label="Empresa"
                     value={company}
+                    disabled={isLoading}
                     type="text"
                     onChange={(e) => setCompany(e.target.value)}
                   />
@@ -196,10 +242,32 @@ export default function RootLayout({
                   <LocalizationProvider dateAdapter={AdapterDayjs}>
                     <DatePicker 
                       label="Data de nascimento"
+                      disabled={isLoading}
                       value={birthday}
                       onChange={(newBirthday) => setBirthday(newBirthday)}
                     />
                   </LocalizationProvider>
+                </FormControl>
+
+                <FormControl fullWidth sx={{ mt: 2 }}>
+                  <TextField 
+                    label="Senha"
+                    required
+                    value={password}
+                    type="password"
+                    onChange={(e) => setPassword(e.target.value)}
+                  />
+                </FormControl>
+
+                <FormControl fullWidth sx={{ mt: 2 }}>
+                  <TextField 
+                    label="Senha"
+                    required
+                    value={confirmPassword}
+                    disabled={isLoading}
+                    type="password"
+                    onChange={(e) => setConfirmPassword(e.target.value)}
+                  />
                 </FormControl>
 
                 <Typography
@@ -214,6 +282,7 @@ export default function RootLayout({
                   sx={{ mt: 2 }} 
                   variant="contained" 
                   onClick={handleRegister}
+                  loading={isLoading}
                 >
                   Criar conta
                 </Button>
