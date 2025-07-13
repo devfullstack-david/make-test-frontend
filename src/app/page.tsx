@@ -1,5 +1,6 @@
 "use client"
 import Welcome from "@/components/general/Welcome";
+import HomeApp from "@/components/home/HomeApp";
 import { useSession } from "@/hooks/useSession";
 
 export default function Home() {
@@ -8,9 +9,7 @@ export default function Home() {
     <div>
       <main>
         {isLoggedIn ? (
-          <div>
-            esta logado
-          </div>
+          <HomeApp />
         ) : (
           <div>
             <Welcome />
