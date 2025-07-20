@@ -27,6 +27,7 @@ import Alert from "@mui/material/Alert";
 import { useRouter } from "next/navigation";
 import ClientOnly from "@/components/general/ClientOnly";
 import { useSession } from "@/hooks/useSession";
+import PageLoader from "@/components/general/PageLoader";
 
 export default function RootLayout({
   children,
@@ -143,6 +144,7 @@ export default function RootLayout({
       <body>
         <ThemeProvider theme={theme}>
           <ClientOnly>
+            <PageLoader />
             <NavBar 
               handleOpenLoginModal={openLoginModal} 
               handleOpenRegisterModal={openRegisterModal} 

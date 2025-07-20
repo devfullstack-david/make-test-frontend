@@ -44,13 +44,14 @@ const HomeApp = () => {
         >
           {images.map((image, index) => (
             <SwiperSlide key={index}>
-              <Image 
+              <Image
+                className="home-app__desktop-image" 
                 src={image.urlImage}
                 alt={`Slide ${index + 1}`}
                 width={500}
                 height={400}
               />
-              <div className="display-text">
+              <div className="display-text home-app__desktop-image">
                 <p>{ image.displayText }</p>
               </div>
             </SwiperSlide>
@@ -58,7 +59,7 @@ const HomeApp = () => {
         </Swiper>
       </div>
 
-      <div>
+      <div className="home-app__buttons">
         <Typography
           variant="h4"
           color="primary"
