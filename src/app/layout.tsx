@@ -26,12 +26,14 @@ import { login } from "@/services/login";
 import Alert from "@mui/material/Alert";
 import { useRouter } from "next/navigation";
 import ClientOnly from "@/components/general/ClientOnly";
+import { useSession } from "@/hooks/useSession";
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const { isLoggedIn } = useSession();
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isOpenSnackbar, setIsOpenSnackbar] = useState<boolean>(false);
   const [showLoginModal, setShowLoginModal] = useState<boolean>(false);
@@ -319,7 +321,8 @@ export default function RootLayout({
               </Box>
             </Modal>
             {children}
-          <Footer />
+
+            {!isLoggedIn && <Footer />}
           </ClientOnly>
         </ThemeProvider>
       </body>
