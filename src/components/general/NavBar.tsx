@@ -95,7 +95,6 @@ const NavBar = ({ handleOpenLoginModal, handleOpenRegisterModal }: NavBarProps) 
                                 } 
                                 onClick={handleOpenRegisterModal}
                                 disabled={pathName === '/login' ? true : false}
-                                style={{ marginLeft: '10px'}}
                             >
                                 Registrar
                             </button>
