@@ -1,40 +1,106 @@
-.primary_text {
-    color: var(--primary);
+.welcome-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
 }
 
-.home_image {
-    width: 70%;
-    height: 30%;
-    border-radius: 10px;
+.welcome-container__intro-text {
+    width: 45%;
+    padding: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.home_alternative_image {
-    width: 70%;
-    height: 30%;
-    border-radius: 10px;
-    margin-top: 40px;
-}
-
-@media (max-width: 1200px) {
-    .testimonials-container {
-     display: block;
-     margin-bottom: 20px;
-    }    
-}
-
-@media (min-width: 1201px) {
-    .testimonials-container {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-bottom: 20px;
-    }    
-}
-
-.question-container {
+.welcome-container__intro-image {
+    width: 45%;
+    padding: 10px;
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 20px;
+}
+
+.welcome-container__intro-image img{
+    border-radius: 40px;
+}
+
+.welcome-container__intro-text__email-container {
+    display: flex;
+    margin-bottom: 15px;
+}
+
+.functionalities-container {
+    margin-top: 55px;
+}
+
+.functionalities-container__list {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 25px;
+    gap: 3%;
+}
+
+.functionalities-container__list-item {
+    display: flex;
     flex-direction: column;
+    align-items: center;
+    width: 15%;
+    flex-direction: column;
+    height: 250px;
+}
+
+.plans-price-container__list {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 25px;
+}
+
+.plans-price-container__list-item {
+    width: 25%;
+    border-radius: 20px;
+    padding: 10px;
+    height: 320px;
+}
+
+.card-title {
+    padding: 20px;
+    background-color: #6de7a0;
+    border-radius: 20px 20px 0px 0px;
+    border: 1px solid black;
+}
+
+.card-content {
+    padding: 20px;
+    border: 1px solid black;
+    border-radius: 0px 0px 20px 20px;
+}
+
+.end-section {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 25px;
+}
+
+.end-section-container {
+    background-color: #6de7a0;
+    width: 70%;
+    padding: 3%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 30px;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.end-section-container__description {
+    width: 50%;
+}
+
+.end-section-container__email-field {
+    display: flex;
+    width: 50%;
 }
